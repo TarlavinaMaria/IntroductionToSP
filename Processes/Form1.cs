@@ -66,7 +66,6 @@ namespace Processes
             labelProcessInfo.Text += $"SessionId:                {myProcess.SessionId}\n";
             labelProcessInfo.Text += $"ProcessName:              {myProcess.ProcessName}\n";
             labelProcessInfo.Text += $"Threads:                  {myProcess.Threads.Count}\n";
-            labelProcessInfo.Text += $"Threads:                  {myProcess.Threads.Count}\n";
         }
     }
 }
