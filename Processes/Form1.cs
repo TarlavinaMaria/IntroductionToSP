@@ -18,9 +18,8 @@ namespace Processes
         {
             InitializeComponent();
             richTextBoxProcessName.Text = "notepad";
-            //InitProcess();
+            InitProcess();
 
-            AllignText();
         }
         void Form1_Closing(object sender, CancelEventArgs e)
         {
@@ -46,11 +45,10 @@ namespace Processes
         {
             //InitProcess();
             //myProcess.Start();
-            //processStack.Push(myProcess);
             //Info();
             
-            Process process = Process.Start($"{richTextBoxProcessName.Text}.exe");
-            processStack.Push(process); // Добавляем процесс в стек
+            myProcess = Process.Start($"{richTextBoxProcessName.Text}.exe");
+            processStack.Push(myProcess); // Добавляем процесс в стек
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
