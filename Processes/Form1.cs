@@ -62,6 +62,7 @@ namespace Processes
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            #region MyRegion
             //if (processStack.Count > 0)
             //{
             //    // Завершаем последний процесс
@@ -86,7 +87,8 @@ namespace Processes
             //            }
             //        }
             //    }
-            //}
+            //} 
+            #endregion
             //----------------------------------------------------------------------------------------//
             if (process_list.Count > 0)
             {
@@ -101,12 +103,21 @@ namespace Processes
         private static extern bool SetForegroundWindow(IntPtr hWnd);
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-             
-            while(process_list.Count > 0)
+
+            while (process_list.Count > 0)
             {
-                process_list.First().CloseMainWindow();
-                process_list.First().Close();
-                process_list.RemoveAt(0);
+                try
+                {
+                    process_list.First().CloseMainWindow();
+                        process_list.First().Close();
+                        process_list.RemoveAt(0);
+
+                }
+                catch (Exception ex)
+                {
+                    process_list.RemoveAt(0);
+                   
+                }
             }
         }
         void Info()
@@ -135,5 +146,6 @@ namespace Processes
                 labelProcessInfo.Text = "Нет запущенных процессов";
             }
         }
+        
     }
 }
