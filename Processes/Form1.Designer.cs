@@ -33,6 +33,8 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.labelProcessInfo = new System.Windows.Forms.Label();
             this.myProcess = new System.Diagnostics.Process();
+            this.dataGridViewInfo = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBoxProcessName
@@ -56,7 +58,7 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(374, 42);
+            this.buttonStop.Location = new System.Drawing.Point(373, 42);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 2;
@@ -83,11 +85,20 @@
             this.myProcess.StartInfo.UserName = "";
             this.myProcess.SynchronizingObject = this;
             // 
+            // dataGridViewInfo
+            // 
+            this.dataGridViewInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewInfo.Location = new System.Drawing.Point(13, 265);
+            this.dataGridViewInfo.Name = "dataGridViewInfo";
+            this.dataGridViewInfo.Size = new System.Drawing.Size(435, 247);
+            this.dataGridViewInfo.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 322);
+            this.ClientSize = new System.Drawing.Size(460, 524);
+            this.Controls.Add(this.dataGridViewInfo);
             this.Controls.Add(this.labelProcessInfo);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
@@ -95,6 +106,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +119,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Label labelProcessInfo;
         private System.Diagnostics.Process myProcess;
+        private System.Windows.Forms.DataGridView dataGridViewInfo;
     }
 }
 
