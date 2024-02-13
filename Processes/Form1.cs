@@ -24,7 +24,7 @@ namespace Processes
             //InitProcess();
             lvProcesses.Columns.Add("PID");
             lvProcesses.Columns.Add("Name");
-
+            
         }
         //void Form1_Closing(object sender, CancelEventArgs e)
         //{
@@ -132,7 +132,6 @@ namespace Processes
         //private static extern bool SetForegroundWindow(IntPtr hWnd);
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             while (process_list.Count > 0)
             {
                 try
@@ -140,7 +139,6 @@ namespace Processes
                     process_list.First().CloseMainWindow();
                     process_list.First().Close();
                     process_list.RemoveAt(0);
-
                 }
                 catch (Exception ex)
                 {
