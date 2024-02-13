@@ -33,23 +33,22 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.labelProcessInfo = new System.Windows.Forms.Label();
             this.myProcess = new System.Diagnostics.Process();
-            this.dataGridViewInfo = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfo)).BeginInit();
+            this.lvProcesses = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // richTextBoxProcessName
             // 
-            this.richTextBoxProcessName.Location = new System.Drawing.Point(13, 13);
+            this.richTextBoxProcessName.Location = new System.Drawing.Point(104, 13);
             this.richTextBoxProcessName.Name = "richTextBoxProcessName";
-            this.richTextBoxProcessName.Size = new System.Drawing.Size(436, 23);
+            this.richTextBoxProcessName.Size = new System.Drawing.Size(265, 24);
             this.richTextBoxProcessName.TabIndex = 0;
             this.richTextBoxProcessName.Text = "calc.exe";
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(13, 42);
+            this.buttonStart.Location = new System.Drawing.Point(16, 12);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(82, 24);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -58,9 +57,9 @@
             // buttonStop
             // 
             this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(373, 42);
+            this.buttonStop.Location = new System.Drawing.Point(373, 13);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.Size = new System.Drawing.Size(75, 24);
             this.buttonStop.TabIndex = 2;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -69,7 +68,7 @@
             // labelProcessInfo
             // 
             this.labelProcessInfo.AutoSize = true;
-            this.labelProcessInfo.Location = new System.Drawing.Point(13, 72);
+            this.labelProcessInfo.Location = new System.Drawing.Point(467, 16);
             this.labelProcessInfo.Name = "labelProcessInfo";
             this.labelProcessInfo.Size = new System.Drawing.Size(69, 13);
             this.labelProcessInfo.TabIndex = 3;
@@ -85,20 +84,24 @@
             this.myProcess.StartInfo.UserName = "";
             this.myProcess.SynchronizingObject = this;
             // 
-            // dataGridViewInfo
+            // lvProcesses
             // 
-            this.dataGridViewInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInfo.Location = new System.Drawing.Point(13, 265);
-            this.dataGridViewInfo.Name = "dataGridViewInfo";
-            this.dataGridViewInfo.Size = new System.Drawing.Size(435, 247);
-            this.dataGridViewInfo.TabIndex = 4;
+            this.lvProcesses.FullRowSelect = true;
+            this.lvProcesses.HideSelection = false;
+            this.lvProcesses.Location = new System.Drawing.Point(16, 43);
+            this.lvProcesses.MultiSelect = false;
+            this.lvProcesses.Name = "lvProcesses";
+            this.lvProcesses.Size = new System.Drawing.Size(432, 332);
+            this.lvProcesses.TabIndex = 4;
+            this.lvProcesses.UseCompatibleStateImageBehavior = false;
+            this.lvProcesses.View = System.Windows.Forms.View.Details;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 524);
-            this.Controls.Add(this.dataGridViewInfo);
+            this.ClientSize = new System.Drawing.Size(922, 387);
+            this.Controls.Add(this.lvProcesses);
             this.Controls.Add(this.labelProcessInfo);
             this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.buttonStart);
@@ -106,7 +109,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +121,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Label labelProcessInfo;
         private System.Diagnostics.Process myProcess;
-        private System.Windows.Forms.DataGridView dataGridViewInfo;
+        private System.Windows.Forms.ListView lvProcesses;
     }
 }
 
