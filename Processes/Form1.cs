@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Processes
 {
@@ -23,6 +24,7 @@ namespace Processes
             //InitProcess();
             lvProcesses.Columns.Add("PID");
             lvProcesses.Columns.Add("Name");
+
         }
         //void Form1_Closing(object sender, CancelEventArgs e)
         //{
@@ -95,28 +97,29 @@ namespace Processes
             #endregion
             //----------------------------------------------------------------------------------------//
             //if (process_list.Count > 0)
-            if (lvProcesses.Items.Count > 0)
-            {
-                try
-                {
-                    //myProcess = process_list.Last();
-                    myProcess = Process.GetProcessById(Convert.ToInt32(lvProcesses.Items[lvProcesses.Items.Count - 1].Text));
-                    myProcess.CloseMainWindow();//Закрывает процесс
-                    myProcess.Close(); // Освобождает ресурсы занимаемые процессом
-                                       //process_list.RemoveAt(process_list.Count - 1);
-                                       //lvProcesses.Items[lvProcesses.Items.Count - 1];
-                                       //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
-                    lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
-                    Info();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //process_list.RemoveAt(process_list.Count - 1);
-                    //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
-                    lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
-                }
-            }
+            //if (lvProcesses.Items.Count > 0)
+            //{
+            //    try
+            //    {
+            //        //myProcess = process_list.Last();
+            //        myProcess = Process.GetProcessById(Convert.ToInt32(lvProcesses.Items[lvProcesses.Items.Count - 1].Text));
+            //        myProcess.CloseMainWindow();//Закрывает процесс
+            //        myProcess.Close(); // Освобождает ресурсы занимаемые процессом
+            //                           //process_list.RemoveAt(process_list.Count - 1);
+            //                           //lvProcesses.Items[lvProcesses.Items.Count - 1];
+            //                           //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
+            //        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
+            //        //Info();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        //process_list.RemoveAt(process_list.Count - 1);
+            //        //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
+            //        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
+            //    }
+            //}
+            DeliteToIndex();
         }
         //[System.Runtime.InteropServices.DllImport("USER32.DLL")]
         //private static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -164,6 +167,54 @@ namespace Processes
                 labelProcessInfo.Text = "Нет запущенных процессов";
             }
         }
-        
+
+        private void lvProcesses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.lvProcesses.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvProcesses.SelectedItems[0];
+                int processId = Convert.ToInt32(selectedItem.Text);// Преобразование ID процесса из текста.
+                Process process = Process.GetProcessById(processId);
+                string info = $"PID:                {process.Id}\n" +
+                        $"BasePriority:             {process.BasePriority}\n" +
+                        $"PriorityClass:            {process.PriorityClass}\n" +
+                        $"StartTime:                {process.StartTime}\n" +
+                        $"UserProcessorTime:        {process.UserProcessorTime}\n" +
+                        $"TotalProcessorTime:       {process.TotalProcessorTime}\n" +
+                        $"SessionId:                {process.SessionId}\n" +
+                        $"ProcessName:              {process.ProcessName}\n" +
+                        $"ProcessorAffinity:        {process.ProcessorAffinity}\n" +
+                        $"Threads:                  {process.Threads.Count}\n" +
+                        $"CPU:                      {process.TotalProcessorTime.TotalSeconds / Environment.ProcessorCount}\n" +
+                        $"Memory:                   {process.WorkingSet64 / (1024 * 1024)}\n";
+
+                labelProcessInfo.Text = info;
+            }
+            else
+            {
+                labelProcessInfo.Text = "Выберите процесс";
+            }
+        }
+
+        private void DeliteToIndex()
+        {
+            if (lvProcesses.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvProcesses.SelectedItems[0];
+                int processId = Convert.ToInt32(selectedItem.Text);// Преобразование ID процесса из текста.
+                try
+                {
+                    Process process = Process.GetProcessById(processId);
+                    process.Kill(); // Закрытие процесса.
+                    process.WaitForExit(); // Ожидание полного завершения процесса.
+
+                    lvProcesses.Items.Remove(selectedItem); // Удаление элемента из ListView.
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не удалось закрыть процесс: {ex.Message}");
+                }
+            }
+        }
     }
 }
