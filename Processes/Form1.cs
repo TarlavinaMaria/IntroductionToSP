@@ -97,29 +97,36 @@ namespace Processes
             #endregion
             //----------------------------------------------------------------------------------------//
             //if (process_list.Count > 0)
-            //if (lvProcesses.Items.Count > 0)
             //{
-            //    try
-            //    {
-            //        //myProcess = process_list.Last();
-            //        myProcess = Process.GetProcessById(Convert.ToInt32(lvProcesses.Items[lvProcesses.Items.Count - 1].Text));
-            //        myProcess.CloseMainWindow();//Закрывает процесс
-            //        myProcess.Close(); // Освобождает ресурсы занимаемые процессом
-            //                           //process_list.RemoveAt(process_list.Count - 1);
-            //                           //lvProcesses.Items[lvProcesses.Items.Count - 1];
-            //                           //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
-            //        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
-            //        //Info();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        //process_list.RemoveAt(process_list.Count - 1);
-            //        //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
-            //        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
-            //    }
-            //}
-            DeliteToIndex();
+            if (lvProcesses.SelectedItems.Count == 1) DeliteToIndex();
+            else
+            {
+                if (lvProcesses.Items.Count > 0)
+                {
+                    try
+                    {
+                        //myProcess = process_list.Last();
+                        myProcess = Process.GetProcessById(Convert.ToInt32(lvProcesses.Items[lvProcesses.Items.Count - 1].Text));
+                        myProcess.CloseMainWindow();//Закрывает процесс
+                        myProcess.Close(); // Освобождает ресурсы занимаемые процессом
+                                           //process_list.RemoveAt(process_list.Count - 1);
+                                           //lvProcesses.Items[lvProcesses.Items.Count - 1];
+                                           //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
+                        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
+                        //Info();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //process_list.RemoveAt(process_list.Count - 1);
+                        //lvProcesses.Items.RemoveByKey(myProcess.Id.ToString());
+                        lvProcesses.Items.RemoveAt(lvProcesses.Items.Count - 1);
+                    }
+                    //}
+                }
+
+            }
+
         }
         //[System.Runtime.InteropServices.DllImport("USER32.DLL")]
         //private static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -174,7 +181,7 @@ namespace Processes
             {
                 ListViewItem selectedItem = lvProcesses.SelectedItems[0];
                 int processId = Convert.ToInt32(selectedItem.Text);// Преобразование ID процесса из текста.
-                Process process = Process.GetProcessById(processId);
+                Process process = Process.GetProcessById(processId); // получение id процесса
                 string info = $"PID:                {process.Id}\n" +
                         $"BasePriority:             {process.BasePriority}\n" +
                         $"PriorityClass:            {process.PriorityClass}\n" +
@@ -204,7 +211,7 @@ namespace Processes
                 int processId = Convert.ToInt32(selectedItem.Text);// Преобразование ID процесса из текста.
                 try
                 {
-                    Process process = Process.GetProcessById(processId);
+                    Process process = Process.GetProcessById(processId);// получение id процесса
                     process.Kill(); // Закрытие процесса.
                     process.WaitForExit(); // Ожидание полного завершения процесса.
 

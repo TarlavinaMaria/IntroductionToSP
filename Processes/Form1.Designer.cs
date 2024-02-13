@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(922, 387);
+            this.ClientSize = new System.Drawing.Size(826, 387);
             this.Controls.Add(this.lvProcesses);
             this.Controls.Add(this.labelProcessInfo);
             this.Controls.Add(this.buttonStop);
