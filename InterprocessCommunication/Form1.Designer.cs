@@ -36,6 +36,7 @@
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonCloseWindow = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonChooseDirectory = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxProcesses
@@ -50,7 +51,7 @@
             // listBoxAssemblies
             // 
             this.listBoxAssemblies.FormattingEnabled = true;
-            this.listBoxAssemblies.Location = new System.Drawing.Point(374, 36);
+            this.listBoxAssemblies.Location = new System.Drawing.Point(394, 35);
             this.listBoxAssemblies.Name = "listBoxAssemblies";
             this.listBoxAssemblies.Size = new System.Drawing.Size(263, 212);
             this.listBoxAssemblies.TabIndex = 1;
@@ -68,7 +69,7 @@
             // labelAssemblies
             // 
             this.labelAssemblies.AutoSize = true;
-            this.labelAssemblies.Location = new System.Drawing.Point(374, 13);
+            this.labelAssemblies.Location = new System.Drawing.Point(394, 12);
             this.labelAssemblies.Name = "labelAssemblies";
             this.labelAssemblies.Size = new System.Drawing.Size(106, 13);
             this.labelAssemblies.TabIndex = 3;
@@ -78,7 +79,7 @@
             // 
             this.buttonStart.Location = new System.Drawing.Point(281, 36);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(87, 23);
+            this.buttonStart.Size = new System.Drawing.Size(107, 23);
             this.buttonStart.TabIndex = 4;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -88,7 +89,7 @@
             // 
             this.buttonStop.Location = new System.Drawing.Point(281, 65);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(87, 23);
+            this.buttonStop.Size = new System.Drawing.Size(107, 23);
             this.buttonStop.TabIndex = 5;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -98,7 +99,7 @@
             // 
             this.buttonCloseWindow.Location = new System.Drawing.Point(281, 94);
             this.buttonCloseWindow.Name = "buttonCloseWindow";
-            this.buttonCloseWindow.Size = new System.Drawing.Size(87, 23);
+            this.buttonCloseWindow.Size = new System.Drawing.Size(107, 23);
             this.buttonCloseWindow.TabIndex = 6;
             this.buttonCloseWindow.Text = "CloseWindow";
             this.buttonCloseWindow.UseVisualStyleBackColor = true;
@@ -108,17 +109,28 @@
             // 
             this.buttonRefresh.Location = new System.Drawing.Point(281, 124);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(87, 23);
+            this.buttonRefresh.Size = new System.Drawing.Size(107, 23);
             this.buttonRefresh.TabIndex = 7;
             this.buttonRefresh.Text = "Refresh";
             this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // buttonChooseDirectory
+            // 
+            this.buttonChooseDirectory.Location = new System.Drawing.Point(282, 224);
+            this.buttonChooseDirectory.Name = "buttonChooseDirectory";
+            this.buttonChooseDirectory.Size = new System.Drawing.Size(107, 23);
+            this.buttonChooseDirectory.TabIndex = 8;
+            this.buttonChooseDirectory.Text = "ChooseDirectory";
+            this.buttonChooseDirectory.UseVisualStyleBackColor = true;
+            this.buttonChooseDirectory.Click += new System.EventHandler(this.buttonChooseDirectory_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 286);
+            this.Controls.Add(this.buttonChooseDirectory);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.buttonCloseWindow);
             this.Controls.Add(this.buttonStop);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonCloseWindow;
         private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonChooseDirectory;
     }
 }
 
