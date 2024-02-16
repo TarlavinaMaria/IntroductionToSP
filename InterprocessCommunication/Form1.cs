@@ -24,12 +24,22 @@ namespace InterprocessCommunication
         List<Process> processes = new List<Process>();
         int count = 0;
         string path;
+        public string Path
+        {
+            get => path;
+            set
+            {
+                path = value;
+                LoadAvailableAssemblies(path);
+            }
+        }
+        event EventHandler PathChanged;
         public Form1()
         {
             InitializeComponent();
-            path = Application.StartupPath;
+            Path = Application.StartupPath;
 
-            LoadAvailableAssemblies(path);
+            //LoadAvailableAssemblies(Path);
             buttonStart.Enabled = false;
             buttonStop.Enabled = false;
             buttonCloseWindow.Enabled = false;
@@ -40,10 +50,16 @@ namespace InterprocessCommunication
             //MessageBox.Show(this, Application.StartupPath, "Info",MessageBoxButtons.OK, MessageBoxIcon.Information);
             string except = new FileInfo(Application.ExecutablePath).Name;
             except.Substring(0, except.IndexOf("."));
+            LoadFilesByType(path, "*.exe");
+            LoadFilesByType(path, "*.lnk");
+        }
+        void LoadFilesByType(string path, string format)
+        {
             //string[] files = Directory.GetFiles(Application.StartupPath, "*.lnk");
-            string[] files = Directory.GetFiles(path, "*.lnk");
+            string[] files = Directory.GetFiles(path, format);
             foreach (string file in files)
             {
+                string except = new FileInfo(Application.ExecutablePath).Name;
                 string fileName = new FileInfo(file).Name;
                 if (fileName.IndexOf(except) == -1)
                     listBoxAssemblies.Items.Add(fileName);
@@ -177,9 +193,14 @@ namespace InterprocessCommunication
         private void buttonChooseDirectory_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.SelectedPath = Path;
             dialog.ShowDialog();
-            string path = dialog.SelectedPath;
+            Path = dialog.SelectedPath;
 
+        }
+        void path_Changed(object sender, EventArgs e)
+        {
+            LoadAvailableAssemblies(Path);
         }
     }
 }
