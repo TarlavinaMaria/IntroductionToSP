@@ -28,55 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.listViewProcess = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonCloseAll = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonRefresh
             // 
-            this.button1.Location = new System.Drawing.Point(15, 14);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 25);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Обновить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(15, 14);
+            this.buttonRefresh.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(88, 25);
+            this.buttonRefresh.TabIndex = 0;
+            this.buttonRefresh.Text = "Обновить";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
-            // button2
+            // buttonClose
             // 
-            this.button2.Location = new System.Drawing.Point(110, 14);
-            this.button2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(170, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Завершить процесс";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonClose.Location = new System.Drawing.Point(110, 14);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(170, 25);
+            this.buttonClose.TabIndex = 1;
+            this.buttonClose.Text = "Завершить процесс";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // listView1
+            // listViewProcess
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewProcess.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(13, 64);
-            this.listView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(544, 444);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewProcess.FullRowSelect = true;
+            this.listViewProcess.GridLines = true;
+            this.listViewProcess.HideSelection = false;
+            this.listViewProcess.Location = new System.Drawing.Point(13, 64);
+            this.listViewProcess.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.listViewProcess.MultiSelect = false;
+            this.listViewProcess.Name = "listViewProcess";
+            this.listViewProcess.Size = new System.Drawing.Size(544, 444);
+            this.listViewProcess.TabIndex = 2;
+            this.listViewProcess.UseCompatibleStateImageBehavior = false;
+            this.listViewProcess.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -88,14 +88,14 @@
             this.columnHeader2.Text = "Используемая память";
             this.columnHeader2.Width = 200;
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            this.textBox1.Location = new System.Drawing.Point(96, 40);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(244, 22);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxSearch.Location = new System.Drawing.Point(96, 40);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(244, 22);
+            this.textBoxSearch.TabIndex = 3;
+            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             // 
             // label1
             // 
@@ -108,39 +108,39 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Поиск";
             // 
-            // button3
+            // buttonCloseAll
             // 
-            this.button3.Location = new System.Drawing.Point(288, 14);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(170, 25);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Завершить дерево процессов";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonCloseAll.Location = new System.Drawing.Point(288, 14);
+            this.buttonCloseAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buttonCloseAll.Name = "buttonCloseAll";
+            this.buttonCloseAll.Size = new System.Drawing.Size(170, 25);
+            this.buttonCloseAll.TabIndex = 5;
+            this.buttonCloseAll.Text = "Завершить дерево процессов";
+            this.buttonCloseAll.UseVisualStyleBackColor = true;
+            this.buttonCloseAll.Click += new System.EventHandler(this.buttonCloseAll_Click);
             // 
-            // button4
+            // buttonAdd
             // 
-            this.button4.Location = new System.Drawing.Point(466, 13);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(91, 26);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Добавить";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.buttonAdd.Location = new System.Drawing.Point(466, 13);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(91, 26);
+            this.buttonAdd.TabIndex = 6;
+            this.buttonAdd.Text = "Добавить";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(579, 520);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.buttonAdd);
+            this.Controls.Add(this.buttonCloseAll);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBoxSearch);
+            this.Controls.Add(this.listViewProcess);
+            this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.buttonRefresh);
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
@@ -153,15 +153,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.ListView listViewProcess;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonCloseAll;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }
 

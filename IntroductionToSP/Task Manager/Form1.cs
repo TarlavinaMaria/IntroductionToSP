@@ -36,7 +36,7 @@ namespace Task_Manager
         }
         private void RefreshProcessesList()
         {
-            listView1.Items.Clear();// очищает текущий список элементов в элементе управления listView1.
+            listViewProcess.Items.Clear();// очищает текущий список элементов в элементе управления listView1.
 
             double memSize = 0; // переменная памяти
             foreach (Process p in processes)//  foreach для перебора всех процессов в коллекции processes.
@@ -62,7 +62,7 @@ namespace Task_Manager
                 string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString() };
 
                 //Создается новый ListViewItem, инициализированный массивом row, и добавляется в список listView1.
-                listView1.Items.Add(new ListViewItem(row)); // добавление в List
+                listViewProcess.Items.Add(new ListViewItem(row)); // добавление в List
 
                 // После использования счетчика pc, выполняется его закрытие и освобождение ресурсов с помощью методов Close() и Dispose().
                 pc.Close();
@@ -78,7 +78,7 @@ namespace Task_Manager
             //перегрузка RefreshProcessesList для поиска, в котором List<Process> processes - список новый, string keyword - процесс
             try
             {
-                listView1.Items.Clear();
+                listViewProcess.Items.Clear();
 
                 double memSize = 0;
                 foreach (Process p in processes)
@@ -96,7 +96,7 @@ namespace Task_Manager
 
                         string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString() };
 
-                        listView1.Items.Add(new ListViewItem(row)); 
+                        listViewProcess.Items.Add(new ListViewItem(row)); 
 
                         pc.Close();
                         pc.Dispose();
@@ -104,7 +104,10 @@ namespace Task_Manager
                 }
                 Text = $"Запущено процессов: '{keyword}'" + processes.Count.ToString();
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void KillProcess(Process process)//Закрытие 1 процесса
@@ -144,7 +147,10 @@ namespace Task_Manager
             }
             //исключение ArgumentException. Это исключение будет брошено, если PID не будет соответствовать запущенному процессу (например, если процесс уже завершился).
             //В случае перехвата исключения, метод просто проигнорирует ошибку и продолжит свою работу. 
-            catch (ArgumentException) { }
+            catch (ArgumentException ex) 
+            {
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private int GetParentProcessId(Process processParent)
         {
@@ -165,7 +171,10 @@ namespace Task_Manager
 
                 parentID = Convert.ToInt32(managementObject["ParentProcessId"]);
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
             return parentID;
         }
 
@@ -179,18 +188,18 @@ namespace Task_Manager
             RefreshProcessesList();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonRefresh_Click(object sender, EventArgs e)
         {
             GetProcesses();
 
             RefreshProcessesList();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonClose_Click(object sender, EventArgs e)
         {
             try
             {
-                if (listView1.SelectedItems[0] != null) // выбранн элемент 
+                if (listViewProcess.SelectedItems[0] != null) // выбранн элемент 
                 {
                     #region Info
                     /*
@@ -201,34 +210,41 @@ namespace Task_Manager
                     */
                     #endregion
                     Process processToKill = processes.Where((x) => x.ProcessName ==
-                     listView1.SelectedItems[0].SubItems[0].Text).ToList()[0];
+                     listViewProcess.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
                     KillProcess(processToKill);
                     GetProcesses();
                     RefreshProcessesList();
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)//завершение дерева процессов
+        private void buttonCloseAll_Click(object sender, EventArgs e)//завершение дерева процессов
         {
+            //??????? Проблема с одним процессом ?????????????
             try
             {
-                if (listView1.SelectedItems[0] != null)
+                if (listViewProcess.SelectedItems[0] != null)
                 {
-                    //where -получим процесс, сравниваем имя процесса с текстом в крайней колонке
+                    
                     Process processToKill = processes.Where((x) => x.ProcessName ==
-                     listView1.SelectedItems[0].SubItems[0].Text).ToList()[0];
+                     listViewProcess.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
                     KillProcessAndChildren(GetParentProcessId(processToKill));
                     GetProcesses();
                     RefreshProcessesList();
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
         }
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonAdd_Click(object sender, EventArgs e)
         {
             #region Info
             /*
@@ -247,12 +263,15 @@ namespace Task_Manager
             {
                 //запуск процесса
                 Process.Start(path);
-                button1_Click(sender, e);
+                buttonRefresh_Click(sender, e);
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             GetProcesses();
             //новый список
@@ -265,9 +284,9 @@ namespace Task_Manager
             */
             #endregion
                         List<Process> filteredprocesses = processes.Where((x) =>
-            x.ProcessName.ToLower().Contains(textBox1.Text.ToLower())).ToList<Process>();
+            x.ProcessName.ToLower().Contains(textBoxSearch.Text.ToLower())).ToList<Process>();
             //вызов обновления списка после поиска
-            RefreshProcessesList(filteredprocesses, textBox1.Text);
+            RefreshProcessesList(filteredprocesses, textBoxSearch.Text);
         }
     }
 }
