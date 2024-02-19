@@ -16,11 +16,6 @@ using System.Collections;
 
 namespace Task_Manager
 {
-    #region Info
-    /*
-     * Добавили файл манифеста, чтобы запускать от имени администратора, чтобы можно было завершать вместе дочерние программы и небыло падений
-     */
-    #endregion
     public partial class Form1 : Form
     {
         private List<Process> processes = null; //список процессов
@@ -96,7 +91,7 @@ namespace Task_Manager
 
                         string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString() };
 
-                        listViewProcess.Items.Add(new ListViewItem(row)); 
+                        listViewProcess.Items.Add(new ListViewItem(row));
 
                         pc.Close();
                         pc.Dispose();
@@ -104,7 +99,7 @@ namespace Task_Manager
                 }
                 Text = $"Запущено процессов: '{keyword}'" + processes.Count.ToString();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -147,7 +142,7 @@ namespace Task_Manager
             }
             //исключение ArgumentException. Это исключение будет брошено, если PID не будет соответствовать запущенному процессу (например, если процесс уже завершился).
             //В случае перехвата исключения, метод просто проигнорирует ошибку и продолжит свою работу. 
-            catch (ArgumentException ex) 
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -171,9 +166,9 @@ namespace Task_Manager
 
                 parentID = Convert.ToInt32(managementObject["ParentProcessId"]);
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             return parentID;
         }
@@ -199,7 +194,7 @@ namespace Task_Manager
         {
             try
             {
-                if (listViewProcess.SelectedItems[0] != null) // выбранн элемент 
+                if (listViewProcess.SelectedItems.Count == 1) // выбранный элемент 
                 {
                     #region Info
                     /*
@@ -216,10 +211,14 @@ namespace Task_Manager
                     GetProcesses();
                     RefreshProcessesList();
                 }
+                else
+                {
+                    MessageBox.Show(this, "Выберите процесс");
+                }
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -228,9 +227,9 @@ namespace Task_Manager
             //??????? Проблема с одним процессом ?????????????
             try
             {
-                if (listViewProcess.SelectedItems[0] != null)
+                if (listViewProcess.SelectedItems.Count == 1)
                 {
-                    
+
                     Process processToKill = processes.Where((x) => x.ProcessName ==
                      listViewProcess.SelectedItems[0].SubItems[0].Text).ToList()[0];
 
@@ -238,10 +237,14 @@ namespace Task_Manager
                     GetProcesses();
                     RefreshProcessesList();
                 }
+                else
+                {
+                    MessageBox.Show(this, "Выберите процесс");
+                }
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -261,13 +264,20 @@ namespace Task_Manager
             string path = Interaction.InputBox("Введите имя программы", "Запуск новой задачи");
             try
             {
-                //запуск процесса
-                Process.Start(path);
-                buttonRefresh_Click(sender, e);
+                if (string.IsNullOrWhiteSpace(path)) 
+                {
+                    MessageBox.Show(this, "Введите имя процесса");
+                }
+                else
+                {
+                    //запуск процесса
+                    Process.Start(path);
+                    buttonRefresh_Click(sender, e);
+                }
             }
-            catch (Exception ex) 
-            { 
-                MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            catch (Exception ex)
+            {
+                //MessageBox.Show(this, ex.Message, "Что-то пошло не по плану", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -283,8 +293,8 @@ namespace Task_Manager
             Для каждого процесса x в processes выполняется эта лямбда - функция, чтобы определить, следует ли включать процесс в результат.
             */
             #endregion
-                        List<Process> filteredprocesses = processes.Where((x) =>
-            x.ProcessName.ToLower().Contains(textBoxSearch.Text.ToLower())).ToList<Process>();
+            List<Process> filteredprocesses = processes.Where((x) =>
+x.ProcessName.ToLower().Contains(textBoxSearch.Text.ToLower())).ToList<Process>();
             //вызов обновления списка после поиска
             RefreshProcessesList(filteredprocesses, textBoxSearch.Text);
         }
