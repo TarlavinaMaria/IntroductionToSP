@@ -15,10 +15,12 @@ namespace TextWindow
     {
         Module DrawModule {  get; set; }
         object drawer;
-
-        public MainForm(Module module, object targetWindow)
+        public MainForm()
         {
             InitializeComponent();
+        }
+        public MainForm(Module module, object[] targetWindow):this()
+        {
             DrawModule = module;
             drawer = targetWindow;
             

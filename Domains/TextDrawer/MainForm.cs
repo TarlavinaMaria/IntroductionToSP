@@ -37,15 +37,6 @@ namespace TextDrower
         {
             Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
         }
-
-        private void fontToolStripMenuItemFont_Click(object sender, EventArgs e)
-        {
-            FontDialog fontDialog = new FontDialog();
-            fontDialog.Font = this.font;
-            if(fontDialog.ShowDialog() == DialogResult.OK) this.font = fontDialog.Font;
-
-            Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
-        }
         public void SetText(string text)
         {
             this.text = text;
@@ -55,6 +46,15 @@ namespace TextDrower
         {
             this.Location = newLication;
             this.Width = width;
+        }
+
+        private void fontToolStripMenuItemFont_Click_1(object sender, EventArgs e)
+        {
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.Font = this.font;
+            if (fontDialog.ShowDialog() == DialogResult.OK) this.font = fontDialog.Font;
+
+            Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
         }
     }
 }

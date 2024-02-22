@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingAppDomains", "UsingApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextWindow", "TextWindow\TextWindow.csproj", "{074907D8-B303-4233-9A84-9E1787BDA4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextDrawer", "TextDrower\TextDrawer.csproj", "{536901DE-4899-4B1A-BA81-AF167CA64AAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextDrawer", "TextDrawer\TextDrawer.csproj", "{1DC98FA8-064C-48A1-9260-04E210DE434A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{074907D8-B303-4233-9A84-9E1787BDA4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{074907D8-B303-4233-9A84-9E1787BDA4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{074907D8-B303-4233-9A84-9E1787BDA4CE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{536901DE-4899-4B1A-BA81-AF167CA64AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{536901DE-4899-4B1A-BA81-AF167CA64AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{536901DE-4899-4B1A-BA81-AF167CA64AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{536901DE-4899-4B1A-BA81-AF167CA64AAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DC98FA8-064C-48A1-9260-04E210DE434A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DC98FA8-064C-48A1-9260-04E210DE434A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DC98FA8-064C-48A1-9260-04E210DE434A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DC98FA8-064C-48A1-9260-04E210DE434A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

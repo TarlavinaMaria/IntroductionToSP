@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TextDrower.Properties
+namespace TextDrawer.Properties
 {
 
 
