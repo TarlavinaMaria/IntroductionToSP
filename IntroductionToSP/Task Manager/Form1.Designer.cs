@@ -73,7 +73,7 @@
             this.listViewProcess.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.listViewProcess.MultiSelect = false;
             this.listViewProcess.Name = "listViewProcess";
-            this.listViewProcess.Size = new System.Drawing.Size(544, 444);
+            this.listViewProcess.Size = new System.Drawing.Size(544, 441);
             this.listViewProcess.TabIndex = 2;
             this.listViewProcess.UseCompatibleStateImageBehavior = false;
             this.listViewProcess.View = System.Windows.Forms.View.Details;
@@ -133,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 520);
+            this.ClientSize = new System.Drawing.Size(579, 517);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonCloseAll);
             this.Controls.Add(this.label1);

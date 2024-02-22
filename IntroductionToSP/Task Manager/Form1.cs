@@ -294,7 +294,7 @@ namespace Task_Manager
             */
             #endregion
             List<Process> filteredprocesses = processes.Where((x) =>
-x.ProcessName.ToLower().Contains(textBoxSearch.Text.ToLower())).ToList<Process>();
+            x.ProcessName.ToLower().Contains(textBoxSearch.Text.ToLower())).ToList<Process>();
             //вызов обновления списка после поиска
             RefreshProcessesList(filteredprocesses, textBoxSearch.Text);
         }
