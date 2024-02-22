@@ -37,6 +37,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(374, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // MainForm
             // 
@@ -48,6 +49,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "TextWindow";
+            this.LocationChanged += new System.EventHandler(this.MainForm_LocationChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsingAppDomains", "UsingApp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextWindow", "TextWindow\TextWindow.csproj", "{074907D8-B303-4233-9A84-9E1787BDA4CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextDrower", "TextDrower\TextDrower.csproj", "{536901DE-4899-4B1A-BA81-AF167CA64AAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextDrawer", "TextDrower\TextDrawer.csproj", "{536901DE-4899-4B1A-BA81-AF167CA64AAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

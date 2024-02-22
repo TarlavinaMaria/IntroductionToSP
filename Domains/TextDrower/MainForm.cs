@@ -46,5 +46,15 @@ namespace TextDrower
 
             Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
         }
+        public void SetText(string text)
+        {
+            this.text = text;
+            Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
+        }
+        public void Move(Point newLication, int width)
+        {
+            this.Location = newLication;
+            this.Width = width;
+        }
     }
 }
