@@ -34,17 +34,16 @@ namespace UsingAppDomains
             drawer = AppDomain.CreateDomain("TextDrawer");
             textWindow = AppDomain.CreateDomain("TextWindow");
             drawerAsm = drawer.Load(AssemblyName.GetAssemblyName("TextDrawer.exe"));
-            textWindowAsm = textWindow.Load(AssemblyName.GetAssemblyName("TextWindow.exe"));
+            textWindowAsm = drawer.Load(AssemblyName.GetAssemblyName("TextWindow.exe"));
 
             DrawerForm = Activator.CreateInstance(drawerAsm.GetType("TextDrawer.MainForm")) as Form;
             TextWindowForm = Activator.CreateInstance
                 (
                     textWindowAsm.GetType("TextWindow.MainForm"),
-                    new object[]
-                    {
-                        drawerAsm.GetModule("TextDrawer.exe"), DrawerForm
-                    }
+                    new object[] { drawerAsm.GetModule("TextDrawer.exe"), DrawerForm }
+                    
                 ) as Form;
+
             (new Thread(new ThreadStart(RunVizualizer))).Start();
             (new Thread(new ThreadStart(RunDrawer))).Start();
 

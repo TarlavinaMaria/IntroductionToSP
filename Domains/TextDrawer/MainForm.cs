@@ -42,9 +42,9 @@ namespace TextDrower
             this.text = text;
             Panel1_Paint(panel1, new PaintEventArgs(panel1.CreateGraphics(), panel1.ClientRectangle));
         }
-        public void Move(Point newLication, int width)
+        public void Move(Point newLocation, int width)
         {
-            this.Location = newLication;
+            this.Location = newLocation;
             this.Width = width;
         }
 

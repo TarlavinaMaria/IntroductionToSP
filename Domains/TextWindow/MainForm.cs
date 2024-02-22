@@ -18,18 +18,17 @@ namespace TextWindow
         public MainForm()
         {
             InitializeComponent();
+
         }
         public MainForm(Module module, object[] targetWindow):this()
         {
             DrawModule = module;
             drawer = targetWindow;
-            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             DrawModule.GetType("TextDrawer.MainForm").GetMethod("SetText").Invoke(drawer, new object[] { textBox1.Text });
-
         }
 
         private void MainForm_LocationChanged(object sender, EventArgs e)
