@@ -14,14 +14,17 @@ using Microsoft.VisualBasic;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Collections;
 
+using System.Windows.Forms.DataVisualization.Charting; // для графиков
 namespace Task_Manager
 {
-    public partial class Form1 : Form
+    public partial class MainFrom : Form
     {
         private List<Process> processes = null; //список процессов
-        public Form1()
+        private PerformanceCounter cpuCounter;//для графиков
+        public MainFrom()
         {
             InitializeComponent();
+
         }
         private void GetProcesses()
         {
@@ -29,6 +32,7 @@ namespace Task_Manager
 
             processes = Process.GetProcesses().ToList<Process>(); // заполнение списка системными процессами, в формате ToList<Process>()
         }
+
         private void RefreshProcessesList()
         {
             listViewProcess.Items.Clear();// очищает текущий список элементов в элементе управления listView1.
@@ -53,8 +57,8 @@ namespace Task_Manager
                 //memSize обновляется значением, полученным от pc.NextValue(), которое затем конвертируется в мегабайты (делением на 1000*1000).
                 memSize = (double)pc.NextValue() / (1000 * 1000); // в мегобайтах
 
-                //Создается массив строк row с двумя элементами: именем процесса и округленным до одного десятичного знака значением его занимаемой памяти.
-                string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString() };
+                //Создается массив строк row с 3 элементами: именем процесса и округленным до одного десятичного знака значением его занимаемой памяти, PID процесса.
+                string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString(), p.Id.ToString() };
 
                 //Создается новый ListViewItem, инициализированный массивом row, и добавляется в список listView1.
                 listViewProcess.Items.Add(new ListViewItem(row)); // добавление в List
@@ -89,7 +93,7 @@ namespace Task_Manager
 
                         memSize = (double)pc.NextValue() / (1000 * 1000);
 
-                        string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString() };
+                        string[] row = new string[] { p.ProcessName.ToString(), Math.Round(memSize, 1).ToString(), p.Id.ToString() };
 
                         listViewProcess.Items.Add(new ListViewItem(row));
 
@@ -181,6 +185,13 @@ namespace Task_Manager
             GetProcesses();
             //заполнение ListView
             RefreshProcessesList();
+            //общий график
+            ChartAll();
+            // Создание и запуск таймера
+            Timer timer = new Timer();
+            timer.Interval += 1500; // интервал обновления в миллисекундах
+            timer.Tick += timer_Tick_1;
+            timer.Start();
         }
 
         private void buttonRefresh_Click(object sender, EventArgs e)
@@ -264,7 +275,7 @@ namespace Task_Manager
             string path = Interaction.InputBox("Введите имя программы", "Запуск новой задачи");
             try
             {
-                if (string.IsNullOrWhiteSpace(path)) 
+                if (string.IsNullOrWhiteSpace(path))
                 {
                     MessageBox.Show(this, "Введите имя процесса");
                 }
@@ -298,5 +309,80 @@ namespace Task_Manager
             //вызов обновления списка после поиска
             RefreshProcessesList(filteredprocesses, textBoxSearch.Text);
         }
+        private void ChartAll()
+        {
+            // Инициализация счетчика процессора
+            cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+
+            // Настройка графика
+            chartCPU.Series.Clear();
+            chartCPU.Series.Add("CPU Usage");
+            chartCPU.Series["CPU Usage"].ChartType = SeriesChartType.Line;
+            chartCPU.Series["CPU Usage"].BorderWidth = 2;
+            chartCPU.Series["CPU Usage"].Color = Color.Blue;
+            chartCPU.ChartAreas[0].AxisY.Maximum = 100;
+            chartCPU.ChartAreas[0].AxisY.Minimum = 0;
+
+            //// Создание и запуск таймера
+            //Timer timer = new Timer();
+            //timer.Interval += 1500; // интервал обновления в миллисекундах
+            //timer.Tick += timer_Tick_1;
+            //timer.Start();
+        }
+        private void timer_Tick_1(object sender, EventArgs e)
+        {
+            if (listViewProcess.SelectedItems.Count == 0)
+            {
+                
+                // Получение текущей загрузки процессора
+                float cpuUsage = cpuCounter.NextValue();
+
+                // Добавление значения в график
+                chartCPU.Series["CPU Usage"].Points.AddY(cpuUsage);
+
+            }
+            else
+            {
+                
+                // Получение текущей загрузки процессора для заданного процесса
+                float processCpuUsage = cpuCounter.NextValue();
+
+                // Добавление значения в график
+                chartCPU.Series["Process CPU Usage"].Points.AddY(processCpuUsage);
+            }
+
+
+        }
+
+        private void listViewProcess_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewProcess.SelectedItems.Count == 1)
+            {
+                // Инициализация счетчика процессора для определенного процесса
+                Process process = Process.GetProcessesByName(listViewProcess.SelectedItems[0].Text)[0];
+                cpuCounter = new PerformanceCounter("Process", "% Processor Time", process.ProcessName);
+
+                // Настройка графика
+                chartCPU.Series.Clear();
+                chartCPU.Series.Add("Process CPU Usage");
+                chartCPU.Series["Process CPU Usage"].ChartType = SeriesChartType.Line;
+                chartCPU.Series["Process CPU Usage"].BorderWidth = 2;
+                chartCPU.Series["Process CPU Usage"].Color = Color.Red;
+                chartCPU.ChartAreas[0].AxisY.Maximum = 100;
+                chartCPU.ChartAreas[0].AxisY.Minimum = 0;
+
+                // Создание и запуск таймера
+                //Timer timer = new Timer();
+                //timer.Interval += 1500; // интервал обновления в миллисекундах
+                //timer.Tick += timer_Tick_1;
+                //timer.Start();
+            }
+            else
+            {
+                ChartAll();
+            }
+
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Task_Manager
 {
-    partial class Form1
+    partial class MainFrom
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.listViewProcess = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCloseAll = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
+            this.chartCPU = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.chartCPU)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonRefresh
@@ -65,7 +73,8 @@
             // 
             this.listViewProcess.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.listViewProcess.FullRowSelect = true;
             this.listViewProcess.GridLines = true;
             this.listViewProcess.HideSelection = false;
@@ -77,6 +86,7 @@
             this.listViewProcess.TabIndex = 2;
             this.listViewProcess.UseCompatibleStateImageBehavior = false;
             this.listViewProcess.View = System.Windows.Forms.View.Details;
+            this.listViewProcess.SelectedIndexChanged += new System.EventHandler(this.listViewProcess_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -87,6 +97,11 @@
             // 
             this.columnHeader2.Text = "Используемая память";
             this.columnHeader2.Width = 200;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "PID";
+            this.columnHeader3.Width = 100;
             // 
             // textBoxSearch
             // 
@@ -129,11 +144,32 @@
             this.buttonAdd.UseVisualStyleBackColor = true;
             this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
-            // Form1
+            // chartCPU
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartCPU.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartCPU.Legends.Add(legend1);
+            this.chartCPU.Location = new System.Drawing.Point(583, 13);
+            this.chartCPU.Name = "chartCPU";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartCPU.Series.Add(series1);
+            this.chartCPU.Size = new System.Drawing.Size(516, 197);
+            this.chartCPU.TabIndex = 7;
+            this.chartCPU.Text = "CPU";
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick_1);
+            // 
+            // MainFrom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 517);
+            this.ClientSize = new System.Drawing.Size(1125, 517);
+            this.Controls.Add(this.chartCPU);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonCloseAll);
             this.Controls.Add(this.label1);
@@ -143,9 +179,10 @@
             this.Controls.Add(this.buttonRefresh);
             this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "Form1";
+            this.Name = "MainFrom";
             this.Text = "Task Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chartCPU)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +199,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonCloseAll;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartCPU;
+        private System.Windows.Forms.Timer timer;
     }
 }
 
