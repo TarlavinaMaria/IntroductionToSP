@@ -80,6 +80,7 @@ namespace Car
             {
                 Console.Clear();
                 Console.WriteLine($"Fuel level: {tank.FuelLevel} liters");
+                
                 Console.WriteLine($"Engine is {(engine.Started ? "started" : "stopped")}");
                 Thread.Sleep(500);
             }

@@ -10,12 +10,11 @@ namespace Car
     {
         static readonly int MIN_VOLUME = 20;
         static readonly int MAX_VOLUME = 120;
-        public readonly int Volume;
-        double fuel_level;
+        public readonly int Volume;//обьем бака
+        double fuel_level;//уровень топлива
         public double FuelLevel
         {
             get => fuel_level;
-
         }
         public Tank(int volume) 
         {
