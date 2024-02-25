@@ -13,14 +13,13 @@ namespace TextWindow
 {
     public partial class MainForm : Form
     {
-        Module DrawModule {  get; set; }
+        Module DrawModule { get; set; }
         object drawer;
         public MainForm()
         {
             InitializeComponent();
-
         }
-        public MainForm(Module module, object[] targetWindow):this()
+        public MainForm(Module module, object targetWindow) : this()
         {
             DrawModule = module;
             drawer = targetWindow;
@@ -35,10 +34,10 @@ namespace TextWindow
         {
             DrawModule.GetType("TextDrawer.MainForm").GetMethod("Move").Invoke
                 (
-                    drawer, 
-                    new object[] 
-                    { 
-                        new Point(this.Location.X, this.Location.Y + this.Height), 
+                    drawer,
+                    new object[]
+                    {
+                        new Point(this.Location.X, this.Location.Y+this.Height),
                         this.Width
                     }
                 );

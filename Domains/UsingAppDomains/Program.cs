@@ -6,11 +6,9 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Threading;
 
-
-
 namespace UsingAppDomains
 {
-    internal static class Program
+    static class Program
     {
         static AppDomain drawer;
         static AppDomain textWindow;
@@ -25,7 +23,7 @@ namespace UsingAppDomains
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        [LoaderOptimization(LoaderOptimization.MultiDomain)]//доступ к исполняемому коду друг друга
+        [LoaderOptimization(LoaderOptimization.MultiDomain)]    //Для того чтобы домены имели доступ к исполняемому коду дрег друга.
         static void Main()
         {
             Application.EnableVisualStyles();
@@ -41,28 +39,28 @@ namespace UsingAppDomains
                 (
                     textWindowAsm.GetType("TextWindow.MainForm"),
                     new object[] { drawerAsm.GetModule("TextDrawer.exe"), DrawerForm }
-                    
                 ) as Form;
 
-            (new Thread(new ThreadStart(RunVizualizer))).Start();
+            (new Thread(new ThreadStart(RunVisualizer))).Start();
             (new Thread(new ThreadStart(RunDrawer))).Start();
 
             drawer.DomainUnload += new EventHandler(Drawer_DomainUnload);
         }
-        static void Drawer_DomainUnload(object sender, EventArgs e) 
+
+        static void Drawer_DomainUnload(object sender, EventArgs e)
         {
-            MessageBox.Show($"Domain {(sender as AppDomain).FriendlyName} has been unloaded");
+            MessageBox.Show($"Domain {(sender as AppDomain).FriendlyName} has been unloaded.");
         }
+
         static void RunDrawer()
         {
             DrawerForm.ShowDialog();
             AppDomain.Unload(drawer);
         }
-        static void RunVizualizer()
+        static void RunVisualizer()
         {
             TextWindowForm.ShowDialog();
             Application.Exit();
         }
-        
     }
 }

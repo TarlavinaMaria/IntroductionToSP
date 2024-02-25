@@ -1,4 +1,4 @@
-﻿namespace TextDrower
+﻿namespace TextDrawer
 {
     partial class MainForm
     {
@@ -58,7 +58,7 @@
             this.fontToolStripMenuItemFont.Name = "fontToolStripMenuItemFont";
             this.fontToolStripMenuItemFont.Size = new System.Drawing.Size(180, 22);
             this.fontToolStripMenuItemFont.Text = "Font";
-            this.fontToolStripMenuItemFont.Click += new System.EventHandler(this.fontToolStripMenuItemFont_Click_1);
+            this.fontToolStripMenuItemFont.Click += new System.EventHandler(this.fontToolStripMenuItemFont_Click);
             // 
             // panel1
             // 
