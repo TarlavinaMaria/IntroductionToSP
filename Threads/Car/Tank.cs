@@ -16,13 +16,19 @@ namespace Car
         {
             get => fuel_level;
         }
-        public Tank(int volume) 
+        public Tank(int volume)
         {
             if (volume < MIN_VOLUME) volume = MIN_VOLUME;
             if (volume > MAX_VOLUME) volume = MAX_VOLUME;
             this.Volume = volume;
             Volume = volume;
             fuel_level = 0;
+        }
+        public double GiveFuel(double amount)
+        {
+            fuel_level -= amount;
+            if(fuel_level < 0) fuel_level = 0;
+            return fuel_level;
         }
         public void Fill(double amount)
         {

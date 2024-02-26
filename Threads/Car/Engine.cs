@@ -11,7 +11,7 @@ namespace Car
         static readonly double MIN_CONSUMPTION = 3;
         static readonly double MAX_CONSUMPTION = 30;
         double consumption;
-        double consumption_per_second;
+        double consumption_per_second;//расход за 1 сек, на 100км
         public bool Started { get; private set; }
         public double Consumption
         {
@@ -28,9 +28,9 @@ namespace Car
         {
             get => consumption_per_second;
         }
-        void setConsumptionPerSecond()
+        public void setConsumptionPerSecond()
         {
-            consumption_per_second = consumption * 3e-5;
+            consumption_per_second = consumption * 3e-5;//дефолтный расход
         }
         public void Start()
         {

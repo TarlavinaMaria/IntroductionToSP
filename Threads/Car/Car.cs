@@ -18,6 +18,7 @@ namespace Car
         struct Threads
         {
             public Thread PanelThread { get; set; }
+            public Thread EngineIdleThread { get; set; }
         }
         Threads threads;
         public Car(double consumption, int volume, int max_speed = 250)
@@ -42,6 +43,29 @@ namespace Car
             threads.PanelThread.Join();
             Console.Clear();
             Console.WriteLine("You are out of the car");
+        }
+        public void Start()
+        {
+            if (driver_inside && tank.FuelLevel != 0)
+            {
+                engine.Start();
+                threads.EngineIdleThread = new Thread(EngineIdle);
+                threads.EngineIdleThread.Start();
+            }
+        }
+        public void Stop()
+        {
+            engine.Stop();
+            threads.EngineIdleThread.Join();
+        }
+        void EngineIdle()//расходует бензин на холостом ходу
+        {
+            while (engine.Started)
+            {
+                tank.GiveFuel(engine.ConsumptionPerSecond);
+                if (tank.FuelLevel == 0) Stop();
+                Thread.Sleep(800);
+            }
         }
         public void Control()
         {
@@ -71,6 +95,10 @@ namespace Car
                             Console.WriteLine("Get out of the car:");
                         }
                         break;
+                    case ConsoleKey.I:
+                        if (engine.Started) engine.Stop();
+                        else Start();
+                        break;
                 }
             } while (key != ConsoleKey.Escape);
         }
@@ -80,7 +108,7 @@ namespace Car
             {
                 Console.Clear();
                 Console.WriteLine($"Fuel level: {tank.FuelLevel} liters");
-                
+                if (tank.FuelLevel < 5) Console.WriteLine("LOW FUEL");
                 Console.WriteLine($"Engine is {(engine.Started ? "started" : "stopped")}");
                 Thread.Sleep(500);
             }
